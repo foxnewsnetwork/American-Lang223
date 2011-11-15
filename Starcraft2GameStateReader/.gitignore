@@ -14,3 +14,4 @@ ipch\*
 ipch\
 Starcraft2GameStateReader\Debug\
 Starcraft2GameStateReader\Debug\*
+*.suo
