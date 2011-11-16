@@ -1,0 +1,17 @@
+*.sdf
+*.*sdf
+Debug/
+Debug/*
+ipch/*
+ipch/
+Starcraft2GameStateReader/Debug/
+Starcraft2GameStateReader/Debug/*
+*.sdf
+*.*sdf
+Debug\
+Debug\*
+ipch\*
+ipch\
+Starcraft2GameStateReader\Debug\
+Starcraft2GameStateReader\Debug\*
+*.suo
