@@ -8,11 +8,14 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	// Change the below value 
-	DWORD offset = 0x26A6EC0;
-	DWORD offset2 = 0x26AFEBE; // or 0x26A711E
+	DWORD offset = 0x026A6EC0; // offset value for getting the player struct
+	DWORD offset2 = 0x026AFEBE; // useless 
+	DWORD offset3 = 0x01DF9400; // useless
+	DWORD o4 = offset3 - 176*448; // offset value for getting the unit struct
+	DWORD o5 = 0x026AFEF0 - 0x32; // useless
 	Player myplayer;
 	Unit myunit;
-	HANDLE sc2proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, 0x000015F0);
+	HANDLE sc2proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, 0x000013A0);
 	
 	if(sc2proc == NULL)
 	{
@@ -24,10 +27,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	BOOL result;
 	int size_temp = sizeof(myunit);
 
-	// result = ReadProcessMemory(sc2proc, (void*)(offset), (void*)&myplayer, sizeof(myplayer), &bytesRead);
-	result = ReadProcessMemory(sc2proc, (void*)(offset2), (void*)&myunit, sizeof(myunit), &bytesRead);
+	result = ReadProcessMemory(sc2proc, (void*)(offset), (void*)&myplayer, sizeof(myplayer), &bytesRead);
+	// result = ReadProcessMemory(sc2proc, (void*)(offset), (void*)&myunit, 448, &bytesRead);
 	
-	if(result == FALSE || bytesRead != 468)
+	if(result == FALSE || bytesRead != 448) // there is 20 bytes just lolnotaccounted for
 		return -2;
 
 	std::cout << "Player 1 has " << myplayer.mineralsCurrent << "minerals." << std::endl;

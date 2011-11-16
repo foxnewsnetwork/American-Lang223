@@ -27,3 +27,18 @@ actually run this.
 The IndigioApp folder is the only one that contains executeable 
 content. All the other folders are projects to DLLs and assemblies
 that are called from within IndigioApp. 
+
+== Things to note
+
+In starcraft 2, supply counts are kept at 4096 * N where N is the
+value you see on your screen when playing.
+
+The same is true for unit health; divide out by 4096 first to get
+the on-screen health difference.
+
+Army_size is the total number of harvesters + units + buildings
+you have on the map
+
+The units structure is sized by the sizeof operator to be 468 bytes
+however, only the first 448 bytes are actually what we're looking
+for. Going the extra 20 bytes will break everything.
