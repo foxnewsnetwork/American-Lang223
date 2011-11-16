@@ -18,4 +18,8 @@
 #include <Windows.h>
 #include <Psapi.h>
 #include <iostream>
+#include <WinBase.h>
+#include <TlHelp32.h>
+#include <tchar.h>
 #include "Starcraft2Structures.h"
+

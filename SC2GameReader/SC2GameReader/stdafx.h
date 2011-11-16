@@ -44,3 +44,5 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <WinBase.h>
+#include <tlhelp32.h>
+#include <tchar.h>

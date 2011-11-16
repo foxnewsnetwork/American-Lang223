@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 
-class CGameState
+class AFX_EXT_CLASS CGameState
 {
 public:
 	const int StarcraftVersion = 142; // that is, 1.4.2
@@ -31,7 +31,7 @@ public:
 
 protected:
 	// Finds the process Id of Starcraft 2 on a given windows machine
-	static DWORD FindProcessId(void);
+	static BOOL FindMyProcess(__in WCHAR processName[MAX_PATH] , __out DWORD & processId);
 	// Sets the offset values for a given instance of the reader
 	void EstablishOffsets(void);
 	// Returns the count of the array and writes the data into the pdata

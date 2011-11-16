@@ -90,10 +90,11 @@ CGameState * CGameState::Initialize(void)
 	CGameState * pGameState = NULL;
 
 	// Step 0: Find the SC2 Process handle
-	DWORD processId = CGameState::FindProcessId();
+	DWORD processId;
+	BOOL result = CGameState::FindMyProcess( L"SC2.exe", processId );
 
 	// If we can't find it, then the user obviously doesn't have sc2 running so we just return the error
-	if(processId == NULL)
+	if(result != TRUE)
 		return pGameState;
 	else
 		pGameState = new CGameState;
@@ -107,13 +108,66 @@ CGameState * CGameState::Initialize(void)
 
 	// Step 2: Set the offsets (eventually this ought to be done intelligently)
 	pGameState->EstablishOffsets();
+
+	// Step 3: we're done
+	return pGameState;
 }
 
 
 // Finds the process Id of Starcraft 2 on a given windows machine
-DWORD CGameState::FindProcessId(void)
+BOOL CGameState::FindMyProcess( __in WCHAR processName[MAX_PATH] , __out DWORD & processId )
 {
-	// IMPLEMENT ME!!
+	HANDLE hProcessSnap;
+	HANDLE hProcess;
+	PROCESSENTRY32 pe32;
+	DWORD dwPriorityClass;
+
+	// Take a snapshot of all processes in the system.
+	hProcessSnap = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
+	if( hProcessSnap == INVALID_HANDLE_VALUE )
+	{
+		// We've encountered a terrible terrible error and we ought to abandon this endeavor
+		return NULL;
+	}
+
+	// Set the size of the structure before using it.
+	pe32.dwSize = sizeof( PROCESSENTRY32 );
+
+	// Retrieve information about the first process,
+	// and exit if unsuccessful
+	if( !Process32First( hProcessSnap, &pe32 ) )
+	{
+		// Cause of error at Process32First
+		CloseHandle( hProcessSnap );          // clean the snapshot object
+		return( NULL );
+	}
+
+	// Setting up the variables
+	TCHAR filename[MAX_PATH];
+
+	// Now we walk the snapshot of processes
+	// and look for SC2; we return it if found
+	// if not, we give up
+	
+	do
+	{
+		// std::cout << "Process name: ";
+		for( int k = 0; k < MAX_PATH; k++ )
+		{
+			// std::cout << CHAR(pe32.szExeFile[k]);
+			if( CHAR(pe32.szExeFile[k]) != CHAR(processName[k]) )
+				break;
+			if( pe32.szExeFile[k] == NULL && processName[k] == NULL ) // second part included to look symmetric but not necessary
+			{
+				processId = pe32.th32ProcessID;
+				return TRUE;
+			}
+		}
+		// std::cout << std::endl;
+	}
+	while (Process32Next( hProcessSnap, &pe32 ) );
+	CloseHandle(hProcessSnap);
+	return FALSE;
 }
 
 
