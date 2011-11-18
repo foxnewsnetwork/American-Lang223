@@ -1,8 +1,15 @@
 #pragma once
+
+#include "stdafx.h"
+
+class SC2PlayerData;
+class SC2EnvironmentData;
+class CGameState;
+
 class CGameState
 {
 public:
-	const int StarcraftVersion = 142; // that is, 1.4.2
+	const static int StarcraftVersion = 142; // that is, 1.4.2
 
 protected:
 	CGameState(void);
@@ -28,10 +35,26 @@ public:
 
 protected:
 	// Finds the process Id of Starcraft 2 on a given windows machine
-	static DWORD FindProcessId(void);
+	static BOOL FindMyProcess(__in WCHAR processName[MAX_PATH] , __out DWORD & processId);
 	// Sets the offset values for a given instance of the reader
 	void EstablishOffsets(void);
 	// Returns the count of the array and writes the data into the pdata
 	int ReadStarcraftData(__out LPVOID pdata);
+	// finds the amount of unitary offset from the unitOffset of the first unit belonging to player 1
+	int FindFirstPlayerUnit(int initial_guess, int count = 0);
 };
 
+class SC2PlayerData
+{
+public:
+	Player player;
+	Unit * units;
+	int UnitCount;
+};
+
+class SC2EnvironmentData
+{
+public:
+	bool GameStart; // true if the game has started
+	int GameTimer; // in seconds
+};

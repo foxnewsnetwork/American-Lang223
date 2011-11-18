@@ -2,10 +2,21 @@
 
 #include "stdafx.h"
 
-class AFX_EXT_CLASS CGameState
+// Stuff or DLL management
+#ifdef STARCRAFTREADER_API
+#undef STARCRAFTREADER_API
+#endif
+
+#ifdef STARCRAFTREADER_EXPORTS
+#define STARCRAFTREADER_API   __declspec(dllexport)
+#else
+#define STARCRAFTREADER_API   __declspec(dllimport)
+#endif
+
+class STARCRAFTREADER_API CGameState
 {
 public:
-	const int StarcraftVersion = 142; // that is, 1.4.2
+	const static int StarcraftVersion = 142; // that is, 1.4.2
 
 protected:
 	CGameState(void);

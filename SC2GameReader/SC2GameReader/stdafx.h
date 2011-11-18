@@ -4,6 +4,7 @@
 
 #pragma once
 
+#define STARCRAFTREADER_EXPORTS
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // Exclude rarely-used stuff from Windows headers
 #endif
@@ -46,3 +47,4 @@
 #include <WinBase.h>
 #include <tlhelp32.h>
 #include <tchar.h>
+

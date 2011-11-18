@@ -61,6 +61,16 @@ BOOL FindMyProcess( __in WCHAR processName[MAX_PATH] , __out DWORD & processId )
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	CGameState * myGame = CGameState::Initialize();
+	if(!myGame)
+		return -1;
+	SC2PlayerData playerState;
+	SC2EnvironmentData environmentState;
+	BOOL res1;
+	BOOL res2;
+	res1 = myGame->RetrievePlayerState(&playerState); // Function debugged, however, there might be a memory leak here
+	res2 = myGame->RetrieveEnvironmentState(&environmentState);
+
 	WCHAR ap[] = L"SC2.exe";
 	DWORD myId;
 	BOOL lolcat = FindMyProcess(ap, myId);

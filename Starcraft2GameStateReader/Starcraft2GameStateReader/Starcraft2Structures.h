@@ -216,8 +216,8 @@ public:
 	__int32 bountyXP; //0x0178  
 	__int8 cellX_Approx; //0x017C  
 	__int8 cellY_Approx; //0x017D  
-		char unknown382[80]; //0x017E
-};//Size=0x01CE(462)
+		char unknown382[60]; //0x017E was 80, changed to 66
+};//Size=0x01CE(462) should be 0x01C0 (448)
  
 class UnitModel
 {

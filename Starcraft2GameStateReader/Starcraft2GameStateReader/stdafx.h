@@ -22,4 +22,4 @@
 #include <TlHelp32.h>
 #include <tchar.h>
 #include "Starcraft2Structures.h"
-
+#include "GameState.h"

@@ -33,7 +33,7 @@
 //		details.
 //
 
-// CSC2GameReaderApp
+ CSC2GameReaderApp;
 
 BEGIN_MESSAGE_MAP(CSC2GameReaderApp, CWinApp)
 END_MESSAGE_MAP()

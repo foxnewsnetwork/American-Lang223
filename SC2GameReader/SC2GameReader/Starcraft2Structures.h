@@ -1,25 +1,36 @@
 #pragma once
 
+// Macro to make the code more readable
+#ifdef STARCRAFTREADER_API
+#undef STARCRAFTREADER_API
+#endif
+
+#ifdef STARCRAFTREADER_EXPORTS
+#define STARCRAFTREADER_API   __declspec(dllexport)
+#else
+#define STARCRAFTREADER_API   __declspec(dllimport)
+#endif
+
 // PLayer table data
-class Player;
-class raceData;
-class raceData2;
+class STARCRAFTREADER_API Player;
+class STARCRAFTREADER_API raceData;
+class STARCRAFTREADER_API raceData2;
 
 // Unit table data
-class Unit;
-class UnitAbilities;
-class UnitModel;
-class Abil;
+class STARCRAFTREADER_API Unit;
+class STARCRAFTREADER_API UnitAbilities;
+class STARCRAFTREADER_API UnitModel;
+class STARCRAFTREADER_API Abil;
 
-class ClassType;
-class ClassTypeInfo;
-class ClassTypeInfoName;
-class AbilQueue;
-class QueueSlots;
-class QueueSlot;
-class CAbilBuildable;
-class AbilHeader;
-class UnitAbilities;
+class STARCRAFTREADER_API ClassType;
+class STARCRAFTREADER_API ClassTypeInfo;
+class STARCRAFTREADER_API ClassTypeInfoName;
+class STARCRAFTREADER_API AbilQueue;
+class STARCRAFTREADER_API QueueSlots;
+class STARCRAFTREADER_API QueueSlot;
+class STARCRAFTREADER_API CAbilBuildable;
+class STARCRAFTREADER_API AbilHeader;
+class STARCRAFTREADER_API UnitAbilities;
 
 // Player table data
 class Player
